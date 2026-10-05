@@ -98,8 +98,17 @@
   }, { passive: true });
   resize();
 
+  // While the page is scrolling, draw every other frame so scrolling stays smooth.
+  let scrolling = false, skip = false, scrollTimer = 0;
+  window.addEventListener('scroll', () => {
+    scrolling = true;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => { scrolling = false; }, 140);
+  }, { passive: true });
+
   if (!C.reduceMotion.matches) {
     C.loop(cv, (dt, t) => {
+      if (scrolling && (skip = !skip)) return;
       nextShot -= dt;
       if (nextShot <= 0) { shoot(); nextShot = 2.5 + Math.random() * 4; }
       draw(dt, t);

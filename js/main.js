@@ -17,8 +17,9 @@
     const done = C.LESSONS.filter((l) => C.Progress.lessonDone(l.id)).length;
     const earned = C.Progress.badges.filter((b) => C.Progress.hasBadge(b.id)).length;
     const dot = (id, ps) => { const p = C.PLANETS.find((x) => x.id === id); return `--ps:${ps}px;--c1:${p.c1};--c2:${p.c2}`; };
+    const seen = C.journeySeen(); // first visit: journey on top; afterwards the hero comes first
     root.innerHTML = `
-      <div id="journey"></div>
+      ${seen ? '' : '<div id="journey"></div>'}
 
       <section class="hero">
         <div class="hero-copy">
@@ -41,6 +42,8 @@
         <p id="fact"><b>Space fact:</b> ${C.pick(C.FACTS)}</p>
         <button class="btn small ghost" id="moreFact" type="button">Another!</button>
       </section>
+
+      ${seen ? '<div id="journey" style="margin-top:34px"></div>' : ''}
 
       <div class="section-title"><h2>Your missions</h2><p>${done} of ${C.LESSONS.length} complete</p></div>
       <div class="grid cards">${C.LESSONS.map((l) =>

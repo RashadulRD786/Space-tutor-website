@@ -9,7 +9,8 @@
   background: radial-gradient(ellipse at 50% 45%, #161650 0, #0b0b2e 55%, #050515 100%);
 }
 .j-stage.spd-skip { --d: .05s; }
-.j-stage.paused *, .j-stage.paused *::before, .j-stage.paused *::after { animation-play-state: paused !important; }
+.j-stage.paused *, .j-stage.paused *::before, .j-stage.paused *::after,
+.j-stage.offscreen *, .j-stage.offscreen *::before, .j-stage.offscreen *::after { animation-play-state: paused !important; }
 .j-art { position: absolute; inset: 0; }
 
 /* ---------- deep-space backdrop ---------- */
@@ -56,12 +57,14 @@
 @keyframes j-sunPulse { from { box-shadow: 0 0 40px 12px rgba(255, 170, 60, .45); } to { box-shadow: 0 0 64px 24px rgba(255, 170, 60, .7); } }
 .j-orb { --r: calc(var(--s) * var(--k2)); position: absolute; left: 50%; top: 50%; width: var(--r); height: var(--r); margin: calc(var(--r) / -2) 0 0 calc(var(--r) / -2); border-radius: 50%; border: 1px dashed rgba(255, 255, 255, .22); animation: j-spin var(--p) linear infinite; }
 .j-orb i { position: absolute; left: 50%; top: 0; width: var(--ps); height: var(--ps); margin: calc(var(--ps) / -2) 0 0 calc(var(--ps) / -2); border-radius: 50%; }
-.j-o1 { --k2: .22; --p: 6s; --ps: 7px; } .j-o1 i { background: #b8b8c8; }
-.j-o2 { --k2: .36; --p: 10s; --ps: 10px; } .j-o2 i { background: #f2c38a; }
-.j-o3 { --k2: .52; --p: 15s; --ps: 13px; } .j-o3 i { background: radial-gradient(circle at 35% 30%, #8ac8ff, #1d5fd1); box-shadow: 0 0 0 4px rgba(90, 170, 255, .35), 0 0 16px 4px rgba(90, 170, 255, .6); }
-.j-o4 { --k2: .68; --p: 22s; --ps: 10px; } .j-o4 i { background: #ff7a5c; }
-.j-o5 { --k2: .84; --p: 34s; --ps: 22px; } .j-o5 i { background: radial-gradient(circle at 35% 30%, #ffe2b8, #d99a5a); }
-.j-o6 { --k2: 1; --p: 50s; --ps: 18px; } .j-o6 i { background: radial-gradient(circle at 35% 30%, #fff0b8, #e6c15a); box-shadow: 0 0 0 3px rgba(240, 220, 160, .5); }
+.j-o1 { --k2: .20; --p: 6s; --ps: 7px; } .j-o1 i { background: #b8b8c8; }
+.j-o2 { --k2: .31; --p: 10s; --ps: 10px; } .j-o2 i { background: #f2c38a; }
+.j-o3 { --k2: .43; --p: 15s; --ps: 13px; } .j-o3 i { background: radial-gradient(circle at 35% 30%, #8ac8ff, #1d5fd1); box-shadow: 0 0 0 4px rgba(90, 170, 255, .35), 0 0 16px 4px rgba(90, 170, 255, .6); }
+.j-o4 { --k2: .55; --p: 22s; --ps: 10px; } .j-o4 i { background: #ff7a5c; }
+.j-o5 { --k2: .68; --p: 34s; --ps: 22px; } .j-o5 i { background: radial-gradient(circle at 35% 30%, #ffe2b8, #d99a5a); }
+.j-o6 { --k2: .80; --p: 50s; --ps: 18px; } .j-o6 i { background: radial-gradient(circle at 35% 30%, #fff0b8, #e6c15a); box-shadow: 0 0 0 3px rgba(240, 220, 160, .5); }
+.j-o7 { --k2: .91; --p: 70s; --ps: 13px; } .j-o7 i { background: radial-gradient(circle at 35% 30%, #d4fbff, #52c4cf); }
+.j-o8 { --k2: 1; --p: 90s; --ps: 13px; } .j-o8 i { background: radial-gradient(circle at 35% 30%, #9fb4ff, #2f46c9); }
 
 /* Milky Way */
 .j-gal-rot { position: absolute; inset: 0; animation: j-spin 200s linear infinite; }
@@ -180,7 +183,7 @@
   .j-lab { display: none; }
 }
 @media (max-width: 760px) {
-  .j-stage { height: 560px; --s: 340px; --k: .55; --oy: 43px; --sx: 0px; --y0: 40px; --y1: 60px; }
+  .j-stage { height: 560px; --s: 300px; --k: .55; --oy: 43px; --sx: 0px; --y0: 40px; --y1: 60px; }
   .j-ship { width: 56px; height: 84px; margin: -42px 0 0 -28px; }
   .j-stackbox { scale: .55; top: 73px; margin-top: 0; }
   .j-caps { left: 16px; top: 16px; width: calc(100% - 32px); }

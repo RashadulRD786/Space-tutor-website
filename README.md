@@ -15,7 +15,7 @@ python3 -m http.server 8000   # then visit http://localhost:8000
 
 | Area | What it shows |
 | --- | --- |
-| **Home** | A cinematic journey intro (astronaut Riyad flies his spaceship from Earth, through the solar system, the Milky Way and the Universe, then up a stack of seven layers; pause, replay or skip it), pure-CSS orbiting-planets hero, parallax starfield with shooting stars (tap the scene for one!), space-fact card, mission and badge overview |
+| **Home** | A cinematic journey intro (astronaut Riyad flies his spaceship from Earth, through the solar system, the Milky Way and the Universe, then up a stack of seven layers; pause, replay or skip it). It plays in full once per browser session, then the hero comes first and the journey sits below it on its finished stack. It pauses when scrolled out of view, and its five stops are also available as text for screen readers. pure-CSS orbiting-planets hero, parallax starfield with shooting stars (tap the scene for one!), space-fact card, mission and badge overview |
 | **Explore** | Interactive solar system: live SVG orbits, speed slider, pause, planet fact cards, and a size-comparison view |
 | **Learn** | 4 missions (Solar System, Stars, Galaxies, Space Exploration), each with animated, interactive visuals such as "cut the gravity rope", star life cycle, dot-to-dot constellation, spinning galaxies, rocket countdown and a golden JWST mirror |
 | **Quiz** | 5-question quizzes per mission plus a mixed round, with instant feedback, stars and confetti |

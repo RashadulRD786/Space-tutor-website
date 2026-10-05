@@ -15,6 +15,14 @@
     { name: 'The Whole Picture', text: 'The top layer, where all the other layers fit together as one.' },
   ];
 
+  const STOPS = [
+    { title: 'Planet Earth', text: 'This is home. Meet Riyad, our astronaut, blasting off in his spaceship!' },
+    { title: 'Our Solar System', text: 'Earth is one of eight planets circling our Sun.' },
+    { title: 'The Milky Way', text: 'The Sun is one tiny star among hundreds of billions in our galaxy.' },
+    { title: 'The Universe', text: 'Our galaxy is one speck in a web of countless galaxies. This is layer 1.' },
+    { title: 'Seven layers (imagined)', text: 'Now imagine zooming out once more. What if our Universe is just layer 1 of a bigger stack? Riyad climbs all seven!' },
+  ];
+
   const ICON = {
     play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
     pause: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>',
@@ -109,6 +117,7 @@
     <div class="j-scene solarS">
       <div class="j-orb j-o1"><i></i></div><div class="j-orb j-o2"><i></i></div><div class="j-orb j-o3"><i></i></div>
       <div class="j-orb j-o4"><i></i></div><div class="j-orb j-o5"><i></i></div><div class="j-orb j-o6"><i></i></div>
+      <div class="j-orb j-o7"><i></i></div><div class="j-orb j-o8"><i></i></div>
       <div class="j-sun"></div>
     </div>
 
@@ -126,11 +135,7 @@
     <div class="j-ship"><div class="j-ship-bob">${SHIP}<span class="j-ship-tag">Riyad</span></div></div>
 
     <div class="j-caps">
-      <div class="j-cap c1"><small>Stop 1 of 5</small><h2>Planet Earth</h2><p>This is home. Meet Riyad, our astronaut, blasting off in his spaceship!</p></div>
-      <div class="j-cap c2"><small>Stop 2 of 5</small><h2>Our Solar System</h2><p>Earth is one of eight planets circling our Sun.</p></div>
-      <div class="j-cap c3"><small>Stop 3 of 5</small><h2>The Milky Way</h2><p>The Sun is one tiny star among hundreds of billions in our galaxy.</p></div>
-      <div class="j-cap c4"><small>Stop 4 of 5</small><h2>The Universe</h2><p>Our galaxy is one speck in a web of countless galaxies. This is layer 1.</p></div>
-      <div class="j-cap c5 last"><small>Stop 5 of 5</small><h2>Seven layers</h2><p>Zoom out once more and the Universe is just layer 1 of a bigger stack. Riyad climbs all seven!</p></div>
+      ${STOPS.map((st, i) => `<div class="j-cap c${i + 1}${i === STOPS.length - 1 ? ' last' : ''}"><small>Stop ${i + 1} of ${STOPS.length}</small><h2>${st.title}</h2><p>${st.text}</p></div>`).join('')}
     </div>
 
     <div class="j-fade"></div>
@@ -142,12 +147,23 @@
       </div>
     </div>`;
 
+  // Play the full animation once per browser session; later visits open on the finished stack.
+  const SEEN = 'cosmo-journey-seen';
+  C.journeySeen = () => { try { return sessionStorage.getItem(SEEN) === '1'; } catch (e) { return false; } };
+
   C.mountJourney = function (root) {
     let active = -1;
+    const instant = C.journeySeen() || C.reduceMotion.matches;
+    try { sessionStorage.setItem(SEEN, '1'); } catch (e) { /* ignore */ }
     root.innerHTML = `
       <section aria-label="Journey from Earth to the seven-layer stack">
+        <div class="sr">
+          <h2>Animated journey</h2>
+          <p>Astronaut Riyad flies his spaceship from Earth, zooming out in five stops. You can pause, replay or skip the animation.</p>
+          <ol>${STOPS.map((st) => `<li><b>${st.title}.</b> ${st.text}</li>`).join('')}</ol>
+        </div>
         <div class="j-stage" id="jStage">
-          <div class="j-art" id="jArt" role="img" aria-label="Animated journey: astronaut Riyad flies his spaceship from Earth through the solar system, the Milky Way and the Universe, then climbs a stack of seven layers"></div>
+          <div class="j-art" id="jArt" aria-hidden="true"></div>
           <div class="j-ctls">
             <button class="j-ctl" id="jPause" type="button" aria-label="Pause the journey">${ICON.pause}</button>
             <button class="j-ctl" id="jReplay" type="button" aria-label="Replay the journey">${ICON.replay}</button>
@@ -159,7 +175,7 @@
         <div class="section-title"><h2 id="jLayersTitle">The seven layers</h2><p>Tap a layer to light it up</p></div>
         <div class="j-lgrid">${LAYERS.map((l, i) => `
           <button class="j-lcard j-l${i + 1}" type="button" data-layer="${i}" aria-pressed="false">
-            <span class="n">${i + 1}</span><b>${l.name}</b><small>Dimension ${i + 1}</small>
+            <span class="n">${i + 1}</span><b>${l.name}</b><small>${i === 0 ? 'Layer 1 · real' : 'Layer ' + (i + 1) + ' · big idea'}</small>
           </button>`).join('')}
         </div>
         <div class="panel j-ldetail" id="jDetail" aria-live="polite"></div>
@@ -204,6 +220,16 @@
     }));
 
     play();
+    if (instant) stage.classList.add('spd-skip');
     showDetail();
+
+    // Stop the endless animations while the stage is scrolled out of view.
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (!stage.isConnected) return io.disconnect();
+        stage.classList.toggle('offscreen', !entries[entries.length - 1].isIntersecting);
+      });
+      io.observe(stage);
+    }
   };
 })();

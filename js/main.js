@@ -57,8 +57,12 @@
       C.$('#fact', root).innerHTML = '<b>Space fact:</b> ' + C.pick(C.FACTS);
       C.shootingStar();
     });
-    C.$('#reset', root).addEventListener('click', () => {
-      if (confirm('Erase all your stars and badges and start over?')) { C.Progress.reset(); route(); }
+    const reset = C.$('#reset', root);
+    reset.addEventListener('click', () => {
+      if (reset.dataset.armed) { C.Progress.reset(); route(); return; }
+      reset.dataset.armed = '1';
+      reset.textContent = 'Tap again to erase all stars and badges';
+      setTimeout(() => { reset.textContent = 'Start over'; delete reset.dataset.armed; }, 4000);
     });
   }
 

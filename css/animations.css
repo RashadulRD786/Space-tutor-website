@@ -1,0 +1,150 @@
+/* Cosmo Academy – keyframes & animated scenes */
+
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes drop { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes pop { 0% { transform: scale(.7); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
+@keyframes floaty { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spinBack { to { transform: rotate(-360deg); } }
+@keyframes twinkle { 0%, 100% { opacity: .35; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: .5; } 50% { transform: scale(1.18); opacity: .9; } }
+@keyframes pulseBorder { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 212, 71, .6); } 50% { box-shadow: 0 0 0 8px rgba(255, 212, 71, 0); } }
+@keyframes ping { 0% { transform: scale(.3); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes wave { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(14deg); } 75% { transform: rotate(-10deg); } }
+@keyframes slideX { to { transform: translateX(-50%); } }
+@keyframes dash { to { stroke-dashoffset: 0; } }
+
+/* ---------- Hero orbit scene (pure CSS) ---------- */
+.hero-scene .h-sun {
+  position: absolute; left: 50%; top: 50%; width: calc(var(--size) * .2); height: calc(var(--size) * .2); margin: calc(var(--size) * -.1) 0 0 calc(var(--size) * -.1);
+  border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6b0, #ffc93c 55%, #ff8a1f);
+  box-shadow: 0 0 40px 14px rgba(255, 190, 60, .55), 0 0 110px 40px rgba(255, 130, 40, .3);
+  animation: sunBeat 3.5s ease-in-out infinite;
+}
+@keyframes sunBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+.h-ring {
+  position: absolute; left: 50%; top: 50%; --d: calc(var(--size) * var(--r)); width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2);
+  border-radius: 50%; border: 1.5px dashed rgba(255, 255, 255, .22); animation: spin var(--t) linear infinite;
+}
+.h-ring i {
+  position: absolute; left: 50%; top: 0; width: var(--ps); height: var(--ps); margin: calc(var(--ps) / -2) 0 0 calc(var(--ps) / -2);
+  border-radius: 50%; background: radial-gradient(circle at 33% 28%, var(--c1), var(--c2) 70%); box-shadow: inset -4px -4px 8px rgba(0, 0, 0, .35), 0 0 12px var(--c2);
+}
+.h-ring.r1 { --r: .46; --t: 9s; }
+.h-ring.r2 { --r: .7; --t: 16s; }
+.h-ring.r3 { --r: .94; --t: 27s; }
+.h-ring.r2 i.moon { top: auto; bottom: 0; }
+.h-ring.r3 i.ringed::after { content: ""; position: absolute; left: -50%; right: -50%; top: 38%; bottom: 38%; border: 3px solid rgba(240, 220, 160, .8); border-radius: 50%; transform: rotate(-18deg); }
+.h-cosmo { position: absolute; right: -2%; bottom: -6%; width: calc(var(--size) * .36); height: calc(var(--size) * .36); animation: floaty 5s ease-in-out infinite; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .5)); }
+.h-cosmo svg { width: 100%; height: 100%; }
+
+/* ---------- Solar system SVG ---------- */
+.sun-halo { transform-origin: center; transform-box: fill-box; animation: pulse 3.5s ease-in-out infinite; }
+.sel-ring { transform-origin: center; transform-box: fill-box; animation: pulse 1.6s ease-in-out infinite; }
+.orbit-line { fill: none; stroke: rgba(255, 255, 255, .14); stroke-width: 1.2; stroke-dasharray: 3 7; }
+.orbit-line.sel { stroke: rgba(255, 212, 71, .55); stroke-dasharray: none; }
+
+/* ---------- Lesson visuals ---------- */
+.v-sun { position: relative; width: 190px; height: 190px; display: grid; place-items: center; }
+.v-sun-core { width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6b0, #ffc93c 55%, #ff8a1f); box-shadow: 0 0 50px 20px rgba(255, 190, 60, .55); animation: sunBeat 3s ease-in-out infinite; }
+.v-sun-glow { position: absolute; inset: 0; border-radius: 50%; border: 3px dotted rgba(255, 212, 71, .55); animation: spin 22s linear infinite; }
+.v-compare { position: absolute; right: 8%; bottom: 20%; display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .85rem; }
+
+.v-groups { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 36px; padding: 14px; }
+.v-group { text-align: center; }
+.v-group h4 { margin: 0 0 8px; color: var(--teal); font-weight: 600; }
+.v-row { display: flex; align-items: flex-end; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.v-row figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: .8rem; color: var(--muted); animation: floaty 5s ease-in-out infinite; animation-delay: var(--dl, 0s); }
+
+.v-svg { width: min(100%, 560px); height: auto; max-height: 100%; display: block; }
+.v-twinkle { animation: twinkle 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+
+.v-earth { position: relative; width: 170px; height: 170px; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 35% 30%, #6fc3ff, #1f63c9 70%); box-shadow: 0 0 40px rgba(80, 160, 255, .5); }
+.v-earth .land { position: absolute; top: 0; left: 0; height: 100%; width: 200%; display: flex; animation: slideX 12s linear infinite; }
+.v-earth .land svg { width: 50%; height: 100%; flex: none; }
+.v-earth::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(90deg, transparent 35%, rgba(0, 0, 20, .65)); }
+.v-axis { position: absolute; width: 4px; height: 230px; background: repeating-linear-gradient(var(--yellow) 0 8px, transparent 8px 14px); transform: rotate(23deg); opacity: .8; }
+
+.star-row { display: flex; gap: clamp(8px, 3vw, 28px); align-items: flex-end; justify-content: center; flex-wrap: wrap; padding: 10px; }
+.star-row figure { margin: 0; text-align: center; font-size: .85rem; color: var(--muted); }
+.star-dot { display: block; margin: 0 auto 8px; width: var(--s); height: var(--s); border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, var(--c) 60%); box-shadow: 0 0 24px 8px var(--c); animation: twinkle 2.8s ease-in-out infinite; animation-delay: var(--dl, 0s); }
+.heat-arrow { position: absolute; bottom: 38px; left: 12%; right: 12%; height: 6px; border-radius: 6px; background: linear-gradient(90deg, #7aa8ff, #fff, #ffd447, #ff9a3c, #ff5f5f); }
+
+.life { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; padding: 12px 8px 40px; }
+.life-star { width: var(--sz, 90px); height: var(--sz, 90px); border-radius: 50%; background: radial-gradient(circle at 40% 35%, var(--hi, #fff), var(--col, #ffd447) 65%); box-shadow: 0 0 var(--glow, 40px) calc(var(--glow, 40px) / 3) var(--col, #ffd447); transition: all 1s cubic-bezier(.3, .8, .3, 1); filter: blur(var(--blur, 0px)); }
+.life-box { height: 190px; display: grid; place-items: center; }
+.life-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.life-chips button { padding: 6px 14px; border-radius: 999px; border: 2px solid var(--line); background: var(--panel-2); min-height: 44px; font-size: .9rem; }
+.life-chips button[aria-pressed="true"] { background: var(--purple); border-color: var(--purple); color: #fff; }
+.life-desc { text-align: center; color: var(--muted); min-height: 3em; padding: 0 12px; }
+
+.const-line { stroke: var(--teal); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+.const-on .const-line { animation: dash 1s ease forwards; animation-delay: calc(var(--i) * .7s); }
+.const-star, .const-label { transform-box: fill-box; transform-origin: center; }
+.const-star { fill: #fff; filter: drop-shadow(0 0 6px #fff); opacity: 0; }
+.const-on .const-star, .const-on .const-label { animation: pop .5s both; animation-delay: calc(var(--i) * .7s); }
+.const-label { fill: var(--muted); font-size: 9px; opacity: 0; }
+
+.gx-wrap { position: absolute; inset: 0 0 30px; display: grid; place-items: center; }
+.gx-wrap canvas { height: 100%; max-height: 380px; aspect-ratio: 1; }
+.gx-three { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; padding: 10px; }
+.gx-three figure { margin: 0; text-align: center; color: var(--muted); font-size: .9rem; }
+.gx-three canvas { width: min(26vw, 190px); aspect-ratio: 1; min-width: 96px; }
+
+.ly { width: min(92%, 560px); display: grid; gap: 18px; }
+.ly-row { display: grid; gap: 4px; font-size: .95rem; }
+.ly-track { position: relative; height: 10px; border-radius: 10px; background: linear-gradient(90deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .18)); }
+.ly-photon { position: absolute; top: -5px; left: 0; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(#fff, var(--yellow)); box-shadow: 0 0 14px 4px rgba(255, 212, 71, .8); animation: travel var(--t) linear infinite; }
+@keyframes travel { from { left: 0; } to { left: calc(100% - 20px); } }
+
+@property --col { syntax: '<color>'; inherits: true; initial-value: #ffd447; }
+@property --hi { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --sz { syntax: '<length>'; inherits: true; initial-value: 90px; }
+@property --glow { syntax: '<length>'; inherits: true; initial-value: 40px; }
+@property --blur { syntax: '<length>'; inherits: true; initial-value: 0px; }
+
+.rocket-scene, .moon-scene, .mars-scene { position: absolute; inset: 0; overflow: hidden; }
+.rocket-scene { }
+.rocket-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 56px; background: linear-gradient(#3b3b78, #232358); border-top: 3px solid #5a5aa8; }
+.rocket { position: absolute; left: 50%; bottom: 50px; width: 70px; margin-left: -35px; transition: none; }
+.rocket.go { animation: liftoff 3.4s cubic-bezier(.5, 0, 1, .6) forwards; }
+.rocket .flame { opacity: 0; transform-origin: 50% 0; }
+.rocket.go .flame { opacity: 1; animation: flicker .12s infinite alternate; }
+@keyframes liftoff { 0% { transform: translate(0, 0); } 10% { transform: translate(-2px, 0); } 20% { transform: translate(2px, 0); } 30% { transform: translate(-2px, -6px); } 100% { transform: translate(0, -460px); } }
+@keyframes flicker { from { transform: scaleY(.8); } to { transform: scaleY(1.3); } }
+.countdown { position: absolute; top: 18px; left: 0; right: 0; text-align: center; font-size: 3rem; font-weight: 700; color: var(--yellow); text-shadow: 0 0 20px rgba(255, 212, 71, .6); }
+.smoke { position: absolute; bottom: 52px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, .6); opacity: 0; }
+.rocket-scene.go .smoke { animation: smoke 2.4s ease-out forwards; animation-delay: var(--dl); }
+@keyframes smoke { 0% { opacity: .8; transform: translate(0, 0) scale(.4); } 100% { opacity: 0; transform: translate(var(--dx), -60px) scale(2.8); } }
+
+.sat-scene { position: relative; width: 250px; height: 250px; margin-bottom: 24px; }
+.sat-earth { position: absolute; left: 50%; top: 50%; width: 110px; height: 110px; margin: -55px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #6fc3ff, #1f63c9 70%); box-shadow: 0 0 30px rgba(80, 160, 255, .6); }
+.sat-earth::before { content: ""; position: absolute; left: 22%; top: 30%; width: 30%; height: 26%; border-radius: 40% 60% 50% 50%; background: #4fcf7f; box-shadow: 40px 24px 0 -4px #4fcf7f; }
+.sat-orbit { position: absolute; inset: 0; border-radius: 50%; border: 1.5px dashed rgba(255, 255, 255, .25); animation: spin 8s linear infinite; }
+.sat { position: absolute; left: 50%; top: -14px; margin-left: -15px; width: 30px; height: 30px; }
+.sat-beep { position: absolute; left: 50%; top: -14px; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%; border: 2px solid var(--yellow); animation: ping 1.6s ease-out infinite; }
+
+.moon-ground { position: absolute; left: -10%; right: -10%; bottom: -80px; height: 190px; border-radius: 50% 50% 0 0; background: radial-gradient(circle at 30% 30%, #d8d8e6, #8c8ca4); }
+.moon-earth { position: absolute; right: 12%; top: 12%; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #6fc3ff, #1f63c9 70%); box-shadow: 0 0 20px rgba(80, 160, 255, .6); }
+.astro { position: absolute; left: 36%; bottom: 82px; width: 74px; animation: moonHop 2.8s ease-in-out infinite; }
+@keyframes moonHop { 0%, 55%, 100% { transform: translateY(0); } 25% { transform: translateY(-84px); } }
+.flag { position: absolute; left: 62%; bottom: 82px; width: 50px; }
+.flag-cloth { transform-origin: left center; animation: wave 3s ease-in-out infinite; }
+
+.mars-scene { background: linear-gradient(#f2b38a, #d9743d 60%); }
+.mars-hill { position: absolute; bottom: 50px; border-radius: 50% 50% 0 0; background: #b3552a; }
+.mars-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(#c4622f, #8e3f1c); }
+.rover { position: absolute; bottom: 52px; left: 0; width: 170px; animation: drive 12s linear infinite; }
+@keyframes drive { from { left: -150px; } to { left: 100%; } }
+.wheel { transform-box: fill-box; transform-origin: center; animation: spin 1.4s linear infinite; }
+
+.hex { fill: url(#gold); stroke: #fff2b3; stroke-width: 1.5; animation: shimmer 3s ease-in-out infinite; animation-delay: var(--dl); }
+@keyframes shimmer { 0%, 100% { filter: brightness(.85); } 50% { filter: brightness(1.5); } }
+
+/* reduced motion: calm everything down (JS also pauses canvas loops) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .const-line { stroke-dashoffset: 0; }
+  .const-star, .const-label { opacity: 1; }
+}

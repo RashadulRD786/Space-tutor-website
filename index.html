@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cosmo Academy</title>
+  <meta name="description" content="Cosmo Academy is a playful space tutor for kids: explore the solar system, learn about stars and galaxies, take quizzes and play mini-games.">
+  <meta name="theme-color" content="#0a0a26">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='34' fill='%238a6bff'/%3E%3Cellipse cx='50' cy='50' rx='48' ry='13' fill='none' stroke='%23ffd447' stroke-width='7' transform='rotate(-20 50 50)'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <a class="skip" href="#view">Skip to content</a>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Cosmo Academy home">
+      <svg class="brand-logo" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="14" fill="#8a6bff"/>
+        <circle cx="19" cy="19" r="5" fill="#b9a6ff" opacity=".7"/>
+        <ellipse cx="24" cy="24" rx="22" ry="6" fill="none" stroke="#ffd447" stroke-width="3" transform="rotate(-20 24 24)"/>
+      </svg>
+      <span>Cosmo <b>Academy</b></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#home" data-nav="home"><span class="ico" aria-hidden="true">🏠</span><span>Home</span></a>
+      <a href="#explore" data-nav="explore"><span class="ico" aria-hidden="true">🪐</span><span>Explore</span></a>
+      <a href="#learn" data-nav="learn"><span class="ico" aria-hidden="true">📚</span><span>Learn</span></a>
+      <a href="#play" data-nav="play"><span class="ico" aria-hidden="true">🎮</span><span>Play</span></a>
+      <a href="#quiz" data-nav="quiz"><span class="ico" aria-hidden="true">🧠</span><span>Quiz</span></a>
+    </nav>
+    <div class="star-counter" title="Your stars" aria-live="polite">
+      <span aria-hidden="true">⭐</span><b id="starCount">0</b><span class="sr">stars</span>
+    </div>
+  </header>
+
+  <main id="view" tabindex="-1">
+    <noscript><p class="panel">Cosmo Academy needs JavaScript to launch. Please turn it on and refresh!</p></noscript>
+  </main>
+
+  <div class="mascot" id="mascot">
+    <div class="bubble" id="bubble" role="status" aria-live="polite" hidden></div>
+    <button class="mascot-btn" id="mascotBtn" type="button" aria-label="Ask Cosmo the space pup for a fun fact">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><use href="#cosmo"/></svg>
+    </button>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <!-- Cosmo the astronaut pup, reusable via <use href="#cosmo"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="glass" cx="35%" cy="30%" r="80%">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+        <stop offset="1" stop-color="#9ad7ff" stop-opacity=".18"/>
+      </radialGradient>
+    </defs>
+    <symbol id="cosmo" viewBox="0 0 120 120">
+      <ellipse cx="22" cy="60" rx="13" ry="25" fill="#8a5a3c" transform="rotate(14 22 60)"/>
+      <ellipse cx="98" cy="60" rx="13" ry="25" fill="#8a5a3c" transform="rotate(-14 98 60)"/>
+      <circle cx="60" cy="60" r="36" fill="#f7e3c2"/>
+      <ellipse cx="76" cy="52" rx="12" ry="13" fill="#b07a52" opacity=".85"/>
+      <circle cx="46" cy="54" r="5" fill="#26263a"/><circle cx="74" cy="54" r="5" fill="#26263a"/>
+      <circle cx="47.5" cy="52" r="1.7" fill="#fff"/><circle cx="75.5" cy="52" r="1.7" fill="#fff"/>
+      <ellipse cx="60" cy="72" rx="15" ry="11" fill="#fff"/>
+      <ellipse cx="60" cy="65" rx="6" ry="4" fill="#26263a"/>
+      <path d="M60 69v5M52 76q8 7 16 0" fill="none" stroke="#26263a" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M55 77q5 9 10 0z" fill="#ff6f8f"/>
+      <circle cx="60" cy="58" r="47" fill="url(#glass)" stroke="#d6ecff" stroke-width="4"/>
+      <path d="M26 38q8-18 28-22" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+      <rect x="30" y="100" width="60" height="14" rx="7" fill="#e8e8f8"/>
+      <path d="M60 103l2.4 4.8 5.3.8-3.8 3.7.9 5.2-4.8-2.5-4.8 2.5.9-5.2-3.8-3.7 5.3-.8z" fill="#ffd447" transform="scale(.6) translate(40 68)"/>
+    </symbol>
+  </svg>
+
+  <script src="js/util.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/mascot.js"></script>
+  <script src="js/starfield.js"></script>
+  <script src="js/solar-system.js"></script>
+  <script src="js/visuals.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

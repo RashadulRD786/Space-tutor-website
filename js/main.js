@@ -18,6 +18,8 @@
     const earned = C.Progress.badges.filter((b) => C.Progress.hasBadge(b.id)).length;
     const dot = (id, ps) => { const p = C.PLANETS.find((x) => x.id === id); return `--ps:${ps}px;--c1:${p.c1};--c2:${p.c2}`; };
     root.innerHTML = `
+      <div id="journey"></div>
+
       <section class="hero">
         <div class="hero-copy">
           <p class="tag">🚀 Space school for curious kids</p>
@@ -52,6 +54,7 @@
 
       <p class="foot">Progress is saved on this device. <button type="button" id="reset">Start over</button></p>`;
 
+    C.mountJourney(C.$('#journey', root));
     C.$('#heroScene', root).addEventListener('click', () => C.shootingStar());
     C.$('#moreFact', root).addEventListener('click', () => {
       C.$('#fact', root).innerHTML = '<b>Space fact:</b> ' + C.pick(C.FACTS);

@@ -31,13 +31,16 @@ body {
   font-size: 17px;
   line-height: 1.5;
   color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+/* The glow lives on its own fixed layer: `background-attachment: fixed` repaints on every scroll frame. */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
     radial-gradient(900px 600px at 15% -10%, rgba(138, 107, 255, .35), transparent 60%),
     radial-gradient(800px 600px at 105% 20%, rgba(255, 111, 181, .22), transparent 60%),
-    radial-gradient(900px 700px at 40% 110%, rgba(61, 224, 201, .16), transparent 60%),
-    var(--bg);
-  background-attachment: fixed;
-  overflow-x: hidden;
+    radial-gradient(900px 700px at 40% 110%, rgba(61, 224, 201, .16), transparent 60%);
 }
 #starfield { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 #confetti { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 90; pointer-events: none; }
@@ -59,8 +62,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
   display: flex; align-items: center; gap: 16px;
   padding: 10px max(16px, env(safe-area-inset-left)) 10px max(16px, env(safe-area-inset-right));
-  background: linear-gradient(180deg, rgba(10, 10, 38, .92), rgba(10, 10, 38, .6));
-  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 38, .94);
   border-bottom: 1px solid var(--line);
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-size: 1.3rem; font-weight: 600; }
@@ -91,8 +93,8 @@ main.enter > *:nth-child(4) { animation-delay: .24s; }
 .section-title p { color: var(--muted); margin: 0; }
 .lead { font-size: 1.15rem; color: var(--muted); max-width: 46ch; }
 .panel {
-  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 20px; box-shadow: var(--shadow); backdrop-filter: blur(6px);
+  background: rgba(28, 28, 92, .78); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow);
 }
 
 /* ---------- Buttons ---------- */
@@ -297,7 +299,7 @@ main.enter > *:nth-child(4) { animation-delay: .24s; }
   .topbar { backdrop-filter: none; background: rgba(10, 10, 38, .94); }
   .nav {
     position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 45; justify-content: space-around; gap: 0;
-    padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: rgba(10, 10, 38, .94); backdrop-filter: blur(12px); border-top: 1px solid var(--line);
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: rgba(10, 10, 38, .97); border-top: 1px solid var(--line);
   }
   .nav a { flex-direction: column; gap: 0; padding: 4px 8px; font-size: .78rem; border-radius: 14px; flex: 1; justify-content: center; min-height: 52px; }
   .nav a:hover { transform: none; }

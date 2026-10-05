@@ -1,0 +1,69 @@
+/* Cosmo Academy – ratings & reviews and FAQ (js/community.js) */
+
+.community { margin-top: 56px; content-visibility: auto; contain-intrinsic-size: auto 640px; }
+.community .section-title { margin-top: 0; }
+.community .tag { margin-left: 6px; }
+
+/* ---------- stars ---------- */
+.stars { display: inline-flex; gap: 2px; vertical-align: middle; }
+.stars svg { fill: rgba(255, 255, 255, .2); }
+.stars svg.on { fill: var(--yellow); filter: drop-shadow(0 0 4px rgba(255, 212, 71, .45)); }
+
+/* ---------- reviews ---------- */
+.rv-wrap { display: grid; grid-template-columns: minmax(240px, 320px) 1fr; gap: 16px; align-items: start; }
+.rv-summary { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.rv-score { display: flex; align-items: baseline; gap: 8px; }
+.rv-score b { font-size: 3.6rem; line-height: 1; background: linear-gradient(90deg, var(--yellow), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.rv-score span { color: var(--muted); }
+.rv-count { margin: 0 0 6px; color: var(--muted); }
+.rv-bars { list-style: none; margin: 0; padding: 0; width: 100%; display: grid; gap: 8px; }
+.rv-bars li { display: grid; grid-template-columns: 12px 14px 1fr 22px; align-items: center; gap: 8px; font-size: .9rem; color: var(--muted); }
+.rv-bars svg { color: var(--yellow); }
+.rv-bars .bar { display: block; height: 10px; border-radius: 99px; background: var(--panel-2); overflow: hidden; }
+.rv-bars .bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--yellow), var(--orange)); }
+.rv-bars em { font-style: normal; text-align: right; }
+
+.rv-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.rv-card { display: flex; flex-direction: column; gap: 10px; }
+.rv-card p { margin: 0; color: #dcdcf8; font-size: 1rem; }
+.rv-card.mine { border-color: var(--yellow); background: linear-gradient(rgba(255, 212, 71, .14), rgba(255, 212, 71, .14)), rgba(28, 28, 92, .78); }
+.rv-head { display: flex; align-items: center; gap: 12px; }
+.rv-head b { display: block; line-height: 1.2; }
+.rv-head small { color: var(--muted); font-size: .85rem; }
+.rv-avatar { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--purple), var(--pink)); }
+
+.rv-form { margin-top: 16px; display: grid; gap: 14px; }
+.rv-form h3 { margin: 0; }
+.rate { position: relative; border: 0; margin: 0; padding: 0; min-width: 0; }
+.rate legend { padding: 0; margin-bottom: 6px; color: var(--muted); font-size: .95rem; }
+.rate-stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; }
+.rate input { position: absolute; opacity: 0; pointer-events: none; }
+.rate label { display: inline-flex; padding: 4px; cursor: pointer; border-radius: 10px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+.rate svg { fill: rgba(255, 255, 255, .2); transition: fill .15s, transform .15s; }
+.rate input:checked ~ label svg, .rate label:hover svg, .rate label:hover ~ label svg { fill: var(--yellow); }
+.rate label:hover svg { transform: scale(1.12); }
+.rate input:focus-visible + label { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.rv-fields { display: grid; grid-template-columns: minmax(180px, 1fr) 2fr; gap: 14px; }
+.rv-fields label { display: grid; gap: 6px; color: var(--muted); font-size: .95rem; }
+.rv-fields input, .rv-fields textarea { font: inherit; color: var(--text); background: var(--panel-2); border: 2px solid var(--line); border-radius: 14px; padding: 10px 14px; min-height: 48px; resize: vertical; width: 100%; box-sizing: border-box; }
+.rv-fields input:focus, .rv-fields textarea:focus { outline: none; border-color: var(--yellow); }
+.rv-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.rv-msg { color: var(--good); font-weight: 500; }
+.rv-msg.bad { color: #ff9b9b; }
+.rv-note { margin: 0; font-size: .85rem; color: var(--muted); }
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; gap: 12px; max-width: 860px; margin-inline: auto; }
+.faq-item { padding: 0; overflow: hidden; transition: border-color .2s; }
+.faq-item[open] { border-color: rgba(255, 212, 71, .55); }
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; min-height: 56px; font-weight: 600; font-size: 1.1rem; cursor: pointer; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--yellow); }
+.faq-item .chev { flex: none; color: var(--yellow); transition: transform .25s; }
+.faq-item[open] .chev { transform: rotate(180deg); }
+.faq-item p { margin: 0; padding: 0 20px 18px; color: #dcdcf8; max-width: 66ch; }
+
+@media (max-width: 860px) {
+  .rv-wrap { grid-template-columns: 1fr; }
+  .rv-fields { grid-template-columns: 1fr; }
+}

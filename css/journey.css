@@ -4,7 +4,7 @@
 
 .j-stage {
   --d: 44s; --s: 520px; --k: 1; --sx: -20px; --oy: 0px; --y0: -172px; --y1: -190px;
-  position: relative; height: 640px; border-radius: var(--radius); overflow: hidden; isolation: isolate;
+  position: relative; height: 640px; border-radius: var(--radius); overflow: hidden; isolation: isolate; contain: layout paint;
   border: 1px solid var(--line); box-shadow: var(--shadow);
   background: radial-gradient(ellipse at 50% 45%, #161650 0, #0b0b2e 55%, #050515 100%);
 }
@@ -16,7 +16,7 @@
 /* ---------- deep-space backdrop ---------- */
 .j-twk { position: absolute; inset: 0; animation: j-twinkle 5s ease-in-out infinite alternate; }
 .j-stars {
-  position: absolute; inset: -50%; background-size: 200px 220px;
+  position: absolute; inset: 0; background-size: 200px 220px;
   background-image: radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent), radial-gradient(1px 1px at 90px 120px, #cfe, transparent), radial-gradient(2px 2px at 150px 60px, #fff, transparent), radial-gradient(1px 1px at 60px 170px, #ffd, transparent), radial-gradient(1.5px 1.5px at 180px 190px, #cdf, transparent);
   animation: j-starRush calc(var(--d) * .7) cubic-bezier(.2, .7, .3, 1) both;
 }
@@ -44,17 +44,19 @@
 /* Earth */
 .j-earth-glow { position: absolute; left: 14%; top: 14%; width: 72%; height: 72%; border-radius: 50%; background: radial-gradient(circle, rgba(90, 170, 255, .35), transparent 68%); }
 .j-earth { position: absolute; left: 22%; top: 22%; width: 56%; height: 56%; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 35% 30%, #4fa3ff, #1d5fd1 55%, #0d2f8f); box-shadow: 0 0 0 2px rgba(150, 210, 255, .25), 0 0 70px 14px rgba(70, 150, 255, .45); }
-.j-earth .land { position: absolute; inset: 0; background-repeat: repeat-x; background-size: 340px 100%; background-image: radial-gradient(ellipse 70px 46px at 22% 38%, #3fbf6e 0 62%, transparent 66%), radial-gradient(ellipse 40px 60px at 40% 68%, #3fbf6e 0 62%, transparent 66%), radial-gradient(ellipse 54px 34px at 70% 28%, #55d17f 0 60%, transparent 64%), radial-gradient(ellipse 36px 48px at 85% 62%, #3fbf6e 0 60%, transparent 64%), radial-gradient(ellipse 22px 16px at 55% 48%, #d9c27a 0 60%, transparent 64%); animation: j-landSpin 26s linear infinite; }
-.j-earth .clouds { position: absolute; inset: 0; background-repeat: repeat-x; background-size: 420px 100%; background-image: radial-gradient(ellipse 90px 11px at 25% 24%, rgba(255, 255, 255, .8), transparent 70%), radial-gradient(ellipse 70px 10px at 62% 44%, rgba(255, 255, 255, .7), transparent 70%), radial-gradient(ellipse 100px 12px at 40% 72%, rgba(255, 255, 255, .75), transparent 70%), radial-gradient(ellipse 60px 9px at 85% 84%, rgba(255, 255, 255, .7), transparent 70%); animation: j-cloudSpin 18s linear infinite; }
+.j-earth .land { position: absolute; top: 0; bottom: 0; left: 0; right: -340px; background-repeat: repeat-x; background-size: 340px 100%; background-image: radial-gradient(ellipse 70px 46px at 22% 38%, #3fbf6e 0 62%, transparent 66%), radial-gradient(ellipse 40px 60px at 40% 68%, #3fbf6e 0 62%, transparent 66%), radial-gradient(ellipse 54px 34px at 70% 28%, #55d17f 0 60%, transparent 64%), radial-gradient(ellipse 36px 48px at 85% 62%, #3fbf6e 0 60%, transparent 64%), radial-gradient(ellipse 22px 16px at 55% 48%, #d9c27a 0 60%, transparent 64%); animation: j-landSpin 26s linear infinite; will-change: transform; }
+.j-earth .clouds { position: absolute; top: 0; bottom: 0; left: 0; right: -420px; background-repeat: repeat-x; background-size: 420px 100%; background-image: radial-gradient(ellipse 90px 11px at 25% 24%, rgba(255, 255, 255, .8), transparent 70%), radial-gradient(ellipse 70px 10px at 62% 44%, rgba(255, 255, 255, .7), transparent 70%), radial-gradient(ellipse 100px 12px at 40% 72%, rgba(255, 255, 255, .75), transparent 70%), radial-gradient(ellipse 60px 9px at 85% 84%, rgba(255, 255, 255, .7), transparent 70%); animation: j-cloudSpin 18s linear infinite; will-change: transform; }
 .j-earth .shade { position: absolute; inset: 0; background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, .28), transparent 34%), radial-gradient(circle at 72% 72%, rgba(0, 0, 25, .72), transparent 66%); }
-@keyframes j-landSpin { to { background-position-x: -340px; } }
-@keyframes j-cloudSpin { to { background-position-x: -420px; } }
+@keyframes j-landSpin { to { translate: -340px 0; } }
+@keyframes j-cloudSpin { to { translate: -420px 0; } }
 .j-moon-orbit { position: absolute; inset: 4%; border-radius: 50%; border: 1px dashed rgba(255, 255, 255, .14); animation: j-spin 14s linear infinite; }
 .j-moon-orbit i { position: absolute; left: 50%; top: -9px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #b9b9cc 60%, #7d7d92); }
 
 /* Solar system */
-.j-sun { position: absolute; left: 50%; top: 50%; width: 14%; height: 14%; margin: -7% 0 0 -7%; border-radius: 50%; background: radial-gradient(circle at 40% 38%, #fff6c2, #ffd447 45%, #ff9a3c); box-shadow: 0 0 50px 18px rgba(255, 170, 60, .55); animation: j-sunPulse 3s ease-in-out infinite alternate; }
-@keyframes j-sunPulse { from { box-shadow: 0 0 40px 12px rgba(255, 170, 60, .45); } to { box-shadow: 0 0 64px 24px rgba(255, 170, 60, .7); } }
+.j-sun { position: absolute; left: 50%; top: 50%; width: 14%; height: 14%; margin: -7% 0 0 -7%; border-radius: 50%; background: radial-gradient(circle at 40% 38%, #fff6c2, #ffd447 45%, #ff9a3c); box-shadow: 0 0 50px 18px rgba(255, 170, 60, .55); }
+/* pulse a glow layer with transform/opacity (compositor-only) instead of animating box-shadow */
+.j-sun::after { content: ""; position: absolute; inset: -60%; border-radius: 50%; background: radial-gradient(circle closest-side, rgba(255, 170, 60, .5), transparent); animation: j-sunPulse 3s ease-in-out infinite alternate; }
+@keyframes j-sunPulse { from { scale: .8; opacity: .5; } to { scale: 1.15; opacity: 1; } }
 .j-orb { --r: calc(var(--s) * var(--k2)); position: absolute; left: 50%; top: 50%; width: var(--r); height: var(--r); margin: calc(var(--r) / -2) 0 0 calc(var(--r) / -2); border-radius: 50%; border: 1px dashed rgba(255, 255, 255, .22); animation: j-spin var(--p) linear infinite; }
 .j-orb i { position: absolute; left: 50%; top: 0; width: var(--ps); height: var(--ps); margin: calc(var(--ps) / -2) 0 0 calc(var(--ps) / -2); border-radius: 50%; }
 .j-o1 { --k2: .20; --p: 6s; --ps: 7px; } .j-o1 i { background: #b8b8c8; }
@@ -69,9 +71,10 @@
 /* Milky Way */
 .j-gal-rot { position: absolute; inset: 0; animation: j-spin 200s linear infinite; }
 .j-gal-rot svg, .j-uni svg { display: block; width: 100%; height: 100%; }
-.j-you { position: absolute; left: 25.75%; top: 44.25%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 0 rgba(255, 212, 71, .7); animation: j-spin 200s linear infinite reverse, j-ping 1.6s ease-out infinite; }
+.j-you { position: absolute; left: 25.75%; top: 44.25%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--yellow); animation: j-spin 200s linear infinite reverse; }
+.j-you::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid rgba(255, 212, 71, .85); animation: j-ping 1.6s ease-out infinite; }
 .j-you span { position: absolute; left: 50%; top: 20px; transform: translateX(-50%); white-space: nowrap; padding: 3px 12px; border-radius: 999px; background: rgba(255, 212, 71, .95); color: #1a1a40; font-weight: 600; font-size: .85rem; }
-@keyframes j-ping { to { box-shadow: 0 0 0 16px rgba(255, 212, 71, 0); } }
+@keyframes j-ping { from { scale: 1; opacity: 1; } to { scale: 3.4; opacity: 0; } }
 
 /* Universe */
 .j-uni .mw { transform-box: fill-box; transform-origin: center; animation: j-ringPing 1.6s ease-out infinite; }
@@ -79,7 +82,7 @@
 
 /* ---------- captions ---------- */
 .j-caps { position: absolute; left: 28px; top: 26px; width: min(310px, calc(100% - 56px)); z-index: 3; }
-.j-cap { position: absolute; left: 0; top: 0; width: 100%; padding: 14px 18px 16px; border-radius: 18px; background: rgba(10, 10, 38, .6); border: 1px solid var(--line); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; animation: j-cap calc(var(--d) * var(--w)) both; animation-delay: calc(var(--d) * var(--c0)); }
+.j-cap { position: absolute; left: 0; top: 0; width: 100%; padding: 14px 18px 16px; border-radius: 18px; background: rgba(10, 10, 38, .78); border: 1px solid var(--line); opacity: 0; visibility: hidden; animation: j-cap calc(var(--d) * var(--w)) both; animation-delay: calc(var(--d) * var(--c0)); }
 .j-cap.last { animation-name: j-capKeep; animation-duration: calc(var(--d) * .04); }
 .j-cap small { display: block; color: var(--yellow); font-weight: 600; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
 .j-cap h2 { margin: 2px 0 4px; font-size: clamp(1.3rem, 3.4vw, 1.7rem); }
@@ -192,5 +195,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .j-stage { --d: .05s !important; }
-  .j-stage .land, .j-stage .clouds, .j-stage .j-moon-orbit, .j-stage .j-orb, .j-stage .j-gal-rot, .j-stage .j-you, .j-stage .j-sun, .j-stage .mw, .j-stage .j-twk, .j-stage .j-ship-bob, .j-stage .flame { animation: none !important; }
+  .j-stage .land, .j-stage .clouds, .j-stage .j-moon-orbit, .j-stage .j-orb, .j-stage .j-gal-rot, .j-stage .j-you, .j-stage .j-you::after, .j-stage .j-sun::after, .j-stage .mw, .j-stage .j-twk, .j-stage .j-ship-bob, .j-stage .flame { animation: none !important; }
 }

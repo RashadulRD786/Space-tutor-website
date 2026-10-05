@@ -55,8 +55,11 @@
       <div class="badges">${C.Progress.badges.map((b) =>
         `<div class="badge${C.Progress.hasBadge(b.id) ? ' on' : ''}"><span class="b-ico" aria-hidden="true">${b.icon}</span><b>${b.name}</b><small>${b.desc}</small></div>`).join('')}</div>
 
+      <div id="community"></div>
+
       <p class="foot">Progress is saved on this device. <button type="button" id="reset">Start over</button></p>`;
 
+    C.mountCommunity(C.$('#community', root));
     C.mountJourney(C.$('#journey', root));
     C.$('#heroScene', root).addEventListener('click', () => C.shootingStar());
     C.$('#moreFact', root).addEventListener('click', () => {
@@ -82,7 +85,7 @@
     r.render(view, param);
     void view.offsetWidth;
     view.classList.add('enter');
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     view.focus({ preventScroll: true });
     if (name === 'explore') setTimeout(() => C.Mascot.say('Tap a planet to say hello!', 5000), 700);
     if (!greeted && (name === 'home' || !ROUTES[name])) {
